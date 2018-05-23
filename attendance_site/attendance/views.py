@@ -1,8 +1,9 @@
-﻿from __future__ import unicode_literals
+﻿from datetime import datetime
 from django.http import HttpResponseRedirect
 from django.template.response import TemplateResponse
 from django.core.urlresolvers import reverse as reverse_url
 from django.core.paginator import Paginator
+from django.utils import timezone
 from utils.paginations import generate_pagination
 from .models import OvertimeEntry
 
@@ -10,9 +11,11 @@ from django.shortcuts import render
 from django.core.exceptions import PermissionDenied
 from .forms import ApplyOvertimeForm
 
+STATUS_WAIT = 0
+STATUS_SUCCESS = 1
 
 def status_to_text(status):
-  if status == 0:
+  if status == STATUS_WAIT:
     return u"審核中"
 
   if status == 1:
@@ -35,9 +38,7 @@ def overtime_list(request):
     pass
   
   qs = OvertimeEntry.objects
-
-  #qs = qs.filter(?)
-
+  qs = qs.filter(user_id=request.user.id)
   qs = qs.order_by("-pub_date")
 
   pagination = generate_pagination(request, qs, 30)
@@ -63,19 +64,25 @@ def apply_overtime(request):
       end_time = form.cleaned_data["end_time"]
       reason = form.cleaned_data["reason"]
 
+      #now = datetime.now()  1999.1.1 +08:00
+      now = timezone.now()   # 1999.1.1 +00:00
+
       delta = end_time - start_time
       print "delta", delta
       entry = OvertimeEntry(
           user = request.user,
           start_time = start_time,
           end_time = end_time,
-          reason = reason
+          status=STATUS_WAIT,
+          reason=reason,
+          pub_date=now,
           )
       entry.save()
-      redirect_to = reverse_url("index")
+      redirect_to = reverse_url("overtime_list")
       return HttpResponseRedirect(redirect_to)
   else:
     form = ApplyOvertimeForm()
+
   return render(request, 'attendance/apply_overtime.html', {
     "form": form,
     })

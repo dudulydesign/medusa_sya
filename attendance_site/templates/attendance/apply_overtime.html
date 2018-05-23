@@ -1,10 +1,27 @@
-﻿{%extends "base.html" %}
-{% block mainbody %}
+﻿{% extends "base.html" %}
+{% load static %}
+
+{% block extra_head %}
+
+  <link rel="stylesheet" type="text/css" href="{% static 'css/jquery-ui.min.css' %}" />
+
+  <script type="text/javascript" src="{% static 'js/jquery-ui.js' %}"></script>
+  <script type="text/javascript">
+  $(function() {
+     $("#id_start_time").datepicker();
+     $("#id_end_time").datepicker();
+
+  });
+  
+  </script>
+{% endblock %}
+
+{% block content %}
 <h2>加班申請</h2>
 <form action="" method="POST">
   {% csrf_token %}
 <table>
-  {{ form }}
+  {{ form.as_table }}
 </table>
 
 <input type="submit" value="OK"/>
