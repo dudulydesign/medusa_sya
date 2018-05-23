@@ -18,7 +18,9 @@ def status_to_text(status):
 
   return "Nan"
 
-def index(request):
+def overtime_list(request):
+
+  #check login ?
 
   page_number = 1
   try:
@@ -28,6 +30,8 @@ def index(request):
   
   qs = OvertimeEntry.objects
 
+  #qs = qs.filter(?)
+
   qs = qs.order_by("-pub_date")
 
   pagination = generate_pagination(request, qs, 30)
@@ -36,6 +40,6 @@ def index(request):
     obj.minutes = round((obj.end_time - obj.start_time).total_seconds() / 60.0, 2)
     obj.status_name = status_to_text(obj.status)
 
-  return TemplateResponse(request, "attendance/index.html", {
+  return TemplateResponse(request, "attendance/overtime_list.html", {
     "pagination": pagination, 
   })

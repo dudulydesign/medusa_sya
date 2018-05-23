@@ -3,5 +3,5 @@ from django.conf.urls import url, include
 import views
 
 urlpatterns = [
-    url(r'^$', views.index, name="attendance_index"),
+    url(r'^overtime_list$', views.overtime_list, name="overtime_list"),
 ]

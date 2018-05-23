@@ -1,26 +1,16 @@
 ﻿{% extends "base.html" %}
 
 {% block content %}
-{% if request.user.is_authenticated %}
 
-<h2>
-  hi, {{ request.user.username }}
-  <a href="{% url 'logout' %}">登出</a>
-</h2>
+<ul>
+  <li>
+    <a href="">加班申請</a>
+  </li>
+  <li>
+    <a href="{% url 'overtime_list' %}">加班紀錄</a>
+  </li>
+</ul>
 
-{% else %}
-<form action="{% url 'login' %}" method="POST">
-  {% csrf_token %}
 
-  <table>
-    {{ login_form.as_table }}
-  </table>
-  <div>
-    <input type="submit" value="登入"/>
-  </div>
-
-</form>
-
-{% endif %}
 
 {% endblock %}

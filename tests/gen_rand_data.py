@@ -15,6 +15,7 @@ def main():
   fake = Faker()
   fake_zh = Faker("zh-tw")
 
+  """
   for i in xrange(3):
     username = "%s%s" % (fake.name().replace(' ', ''), int(time.time()))
     user = User(
@@ -24,6 +25,7 @@ def main():
     user.set_password("12345678")
     user.save()
     print "create user", user.id, user.username
+  """
 
   all_users = list(User.objects.all())
 

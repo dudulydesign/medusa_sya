@@ -6,6 +6,9 @@ from django.contrib.auth import login as auth_login, logout as auth_logout
 from .forms import LoginForm
 
 def index(request):
+  if not request.user.is_authenticated():
+    return HttpResponseRedirect(reverse_url("login"))
+
   return TemplateResponse(request, "index.html", {
   })
 

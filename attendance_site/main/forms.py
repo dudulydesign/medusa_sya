@@ -11,7 +11,7 @@ class LoginForm(forms.Form):
     username = cleaned_data["username"]
     password = cleaned_data["password"]
     try:
-      user = User.objects.get(usernamae=username)
+      user = User.objects.get(username=username)
     except User.DoesNotExist:
       raise forms.ValidationError(u"使用者不存在!")
 
