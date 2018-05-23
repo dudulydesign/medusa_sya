@@ -1,9 +1,14 @@
-﻿from django.http import HttpResponseRedirect
+﻿from __future__ import unicode_literals
+from django.http import HttpResponseRedirect
 from django.template.response import TemplateResponse
 from django.core.urlresolvers import reverse as reverse_url
 from django.core.paginator import Paginator
 from utils.paginations import generate_pagination
 from .models import OvertimeEntry
+
+from django.shortcuts import render
+from django.core.exceptions import PermissionDenied
+from .forms import ApplyOvertimeForm
 
 
 def status_to_text(status):
@@ -20,7 +25,8 @@ def status_to_text(status):
 
 def overtime_list(request):
 
-  #check login ?
+  if not request.user.is_authenticated():
+    raise PermissionDenied
 
   page_number = 1
   try:
@@ -43,3 +49,34 @@ def overtime_list(request):
   return TemplateResponse(request, "attendance/overtime_list.html", {
     "pagination": pagination, 
   })
+
+
+def apply_overtime(request):
+  if not request.user.is_authenticated():
+    raise PermissionDenied
+
+  if request.method == "POST":
+    form = ApplyOvertimeForm(request.POST)
+    if form.is_valid():
+      print "->" * 100
+      start_time = form.cleaned_data["start_time"]
+      end_time = form.cleaned_data["end_time"]
+      reason = form.cleaned_data["reason"]
+
+      delta = end_time - start_time
+      print "delta", delta
+      entry = OvertimeEntry(
+          user = request.user,
+          start_time = start_time,
+          end_time = end_time,
+          reason = reason
+          )
+      entry.save()
+      redirect_to = reverse_url("index")
+      return HttpResponseRedirect(redirect_to)
+  else:
+    form = ApplyOvertimeForm()
+  return render(request, 'attendance/apply_overtime.html', {
+    "form": form,
+    })
+

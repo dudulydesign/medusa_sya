@@ -1,0 +1,15 @@
+﻿{%extends "base.html" %}
+{% block mainbody %}
+<h2>加班申請</h2>
+<form action="" method="POST">
+  {% csrf_token %}
+<table>
+  {{ form }}
+</table>
+
+<input type="submit" value="OK"/>
+
+</form>
+
+{% endblock %}
+
