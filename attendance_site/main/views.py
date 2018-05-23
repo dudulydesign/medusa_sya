@@ -1,9 +1,9 @@
 from django.http import HttpResponseRedirect
+from django.shortcuts import render
 from django.template.response import TemplateResponse
 from django.core.urlresolvers import reverse as reverse_url
 from django.contrib.auth import login as auth_login, logout as auth_logout
 from .forms import LoginForm
-
 
 def index(request):
   return TemplateResponse(request, "index.html", {
