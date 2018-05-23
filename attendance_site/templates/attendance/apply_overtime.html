@@ -4,12 +4,14 @@
 {% block extra_head %}
 
   <link rel="stylesheet" type="text/css" href="{% static 'css/jquery-ui.min.css' %}" />
+  <link rel="stylesheet" type="text/css" href="{% static 'css/jquery-ui-timepicker-addon.css' %}" />
 
   <script type="text/javascript" src="{% static 'js/jquery-ui.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/jquery-ui-timepicker-addon.js' %}"></script>
   <script type="text/javascript">
   $(function() {
-     $("#id_start_time").datepicker();
-     $("#id_end_time").datepicker();
+     $("#id_start_time").datetimepicker();
+     $("#id_end_time").datetimepicker();
 
   });
   

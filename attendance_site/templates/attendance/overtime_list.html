@@ -1,5 +1,40 @@
 ﻿{% extends "base.html" %}
 
+{% block extra_head %}
+  <script type="text/javascript">
+
+  $(function() {
+    
+    $(".overtime-cancel-link").click(function(){
+
+      var ok = confirm("確定要取消嗎?");
+      var url = $(this).attr("href");
+
+      if(ok) {
+        $.get(url, function(rep) {
+           alert(rep.message);
+            if(rep.code == 0) {
+               window.location.reload();
+            }
+
+
+        });
+
+
+      }
+
+
+       return false;
+    });
+
+
+
+  });
+
+  </script>
+  
+
+{% endblock %}
 
 {% block content %}
 
@@ -28,7 +63,7 @@
       <td>{{ obj.reason }}</td>
       <td>
 
-        <a href="">取消申請</a>
+        <a class="overtime-cancel-link" href="{% url 'overtime_cancel' %}?q={{ obj.id }}">取消申請</a>
       
       </td>
     </tr>

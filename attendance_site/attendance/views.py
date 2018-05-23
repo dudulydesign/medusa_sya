@@ -1,5 +1,5 @@
 ﻿from datetime import datetime
-from django.http import HttpResponseRedirect
+from django.http import JsonResponse, HttpResponseRedirect
 from django.template.response import TemplateResponse
 from django.core.urlresolvers import reverse as reverse_url
 from django.core.paginator import Paginator
@@ -13,6 +13,7 @@ from .forms import ApplyOvertimeForm
 
 STATUS_WAIT = 0
 STATUS_SUCCESS = 1
+STATUS_CANCEL = 3
 
 def status_to_text(status):
   if status == STATUS_WAIT:
@@ -38,7 +39,7 @@ def overtime_list(request):
     pass
   
   qs = OvertimeEntry.objects
-  qs = qs.filter(user_id=request.user.id)
+  qs = qs.filter(user_id=request.user.id).exclude(status=STATUS_CANCEL)
   qs = qs.order_by("-pub_date")
 
   pagination = generate_pagination(request, qs, 30)
@@ -51,6 +52,28 @@ def overtime_list(request):
     "pagination": pagination, 
   })
 
+def cancel_overtime(request):
+  if request.user.is_authenticated():
+    _id = int(request.GET["q"])
+
+    try:
+      entry = OvertimeEntry.objects.get(id=_id)
+      if entry.user_id == request.user.id:
+        entry.status = STATUS_CANCEL
+        entry.save()
+        return JsonResponse({
+              "message": u"取消成功!",
+              "code": 0,
+          })
+    except OvertimeEntry.DoesNotExist:
+      pass
+
+  #redirect_to = reverse_url("overtime_list")
+  #return HttpResponseRedirect(redirect_to)
+  return JsonResponse({
+        "message": u"失敗",
+        "code": 1,
+    })
 
 def apply_overtime(request):
   if not request.user.is_authenticated():
