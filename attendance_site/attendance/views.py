@@ -27,6 +27,16 @@ def status_to_text(status):
 
   return "Nan"
 
+'''
+def leader_audit(request):
+
+  if not request.user.is_authenticated():
+    raise PermissionDenied
+  return TemplateResponse(request, "attendance/leader_audit.html", {
+    "pagination": pagination,
+    })
+'''
+
 def overtime_list(request):
 
   if not request.user.is_authenticated():
