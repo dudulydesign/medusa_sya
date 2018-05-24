@@ -104,7 +104,7 @@ def cancel_overtime(request):
         "code": 1,
     })
 '''
-def pass_overtime(request):
+def audit_(request):
   if request.user.is_authenticated():
     _id = int(request.GET["q"])
 
