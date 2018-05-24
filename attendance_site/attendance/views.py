@@ -27,15 +27,34 @@ def status_to_text(status):
 
   return "Nan"
 
-'''
+
 def leader_audit(request):
 
   if not request.user.is_authenticated():
     raise PermissionDenied
+  
+  page_number = 1
+  try:
+    page_number = int(request.GET["p"])
+  except:
+    pass
+
+  qs = OvertimeEntry.objects
+  qs = qs.filter(user=request.user.id).exclude(status=STATUS_CANCEL)
+  qs = qs.order_by("-pub_date")
+
+
+  pagination = generate_pagination(request, qs, 30)
+  
+  for obj in pagination.page.object_list:
+     obj.minutes = round((obj.end_time - obj.start_time).total_seconds() / 60.0, 2)
+     obj.status_name = status_to_text(obj.status)
+
+
   return TemplateResponse(request, "attendance/leader_audit.html", {
     "pagination": pagination,
     })
-'''
+
 
 def overtime_list(request):
 
@@ -49,7 +68,7 @@ def overtime_list(request):
     pass
   
   qs = OvertimeEntry.objects
-  qs = qs.filter(user_id=request.user.id).exclude(status=STATUS_CANCEL)
+  qs = qs.filter(user=request.user.id).exclude(status=STATUS_CANCEL)
   qs = qs.order_by("-pub_date")
 
   pagination = generate_pagination(request, qs, 30)
@@ -84,6 +103,14 @@ def cancel_overtime(request):
         "message": u"失敗",
         "code": 1,
     })
+'''
+def pass_overtime(request):
+  if request.user.is_authenticated():
+    _id = int(request.GET["q"])
+
+  try:
+    entry = OvertimeEntry.objects.get(
+'''
 
 def apply_overtime(request):
   if not request.user.is_authenticated():
