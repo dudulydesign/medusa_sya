@@ -2,6 +2,9 @@
 
 {% block content %}
 
+
+
+
 <ul>
   <li>
     <a href="{% url 'apply_overtime' %}">加班申請</a>
@@ -15,5 +18,11 @@
 </ul>
 
 
+hi, {{ request.user.username }}
+<ul>
+  <li>
+    <a href="{% url 'logout' %}">登出</a>
+  </li>
+</ul>
 
 {% endblock %}

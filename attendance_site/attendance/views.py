@@ -10,6 +10,7 @@ from .models import OvertimeEntry
 from django.shortcuts import render
 from django.core.exceptions import PermissionDenied
 from .forms import ApplyOvertimeForm
+from main.models import StaffRelatedEntry
 
 STATUS_WAIT = 0
 STATUS_SUCCESS = 1
@@ -28,7 +29,15 @@ def status_to_text(status):
   return "Nan"
 
 
-def leader_audit(request):
+def overtime_audit(request): 
+  _id = int(request.GET["q"])
+  entry = OvertimeEntry.objects.get(id=_id)
+
+  return TemplateResponse(request, "attendance/overtime_audit.html", {
+    "entry": entry,
+    })
+
+def leader_audit_list(request):
 
   if not request.user.is_authenticated():
     raise PermissionDenied
@@ -39,8 +48,16 @@ def leader_audit(request):
   except:
     pass
 
+
+  staff_entries = list(StaffRelatedEntry.objects.filter(user_id=request.user.id).all())
+  staff_user_ids = [s.staff_user_id for s in staff_entries]
+  print "staff_user_ids", staff_user_ids
+
   qs = OvertimeEntry.objects
-  qs = qs.filter(user=request.user.id).exclude(status=STATUS_CANCEL)
+  qs = qs.filter(status=STATUS_WAIT)
+  #qs = qs.exclude(user_id=request.user.id)
+  qs = qs.filter(user_id__in=staff_user_ids)
+  #qs = qs.exclude(status=STATUS_CANCEL)
   qs = qs.order_by("-pub_date")
 
 

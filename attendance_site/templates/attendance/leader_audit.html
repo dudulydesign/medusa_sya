@@ -1,8 +1,18 @@
 ﻿{% extends "base.html" %}
+
+{% load static %}
 {% block extra_head %}
+
+  <link rel="stylesheet" type="text/css" href="{% static 'js/facebox/facebox.css' %}" />
+  <script type="text/javascript" src="{% static 'js/facebox/facebox.js'%}"></script>
+
   <script type="text/javascript">
   $(function() 
     {
+
+
+      $(".overtime-audit-link").facebox();
+
     $(".overtime-cancel-link").click(function(){
       var ok = confirm("確定要取消嗎?");
       var url = $(this).attr("href");
@@ -50,8 +60,13 @@ overtime_list
       <td>{{ obj.reason }}</td>
       <td>
 
+        <a class="overtime-audit-link" href="{% url 'overtime_audit' %}?q={{ obj.id }}">簽核</a>
+
+        <!--
+
         <a class="overtime-cancel-link" href="{% url 'overtime_cancel'%}?q={{ obj.id }}">通過</a>
         <a class="overtime-cancel-link" href="{% url 'overtime_cancel'%}?q={{ obj.id }}">不通過</a>
+        -->
       </td>
 
     </tr>

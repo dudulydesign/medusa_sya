@@ -18,16 +18,21 @@ def main():
 
   user.save()
 
-  username = "testuser1"
-  try:
 
-    user = User.objects.get(username=username)
+  for i in xrange(10):
 
-  except User.DoesNotExist:
-    user = User(username=username)
+    username = "testuser%s" % (i+1)
+    try:
 
-  user.set_password("12345678")
-  user.is_active = True
+      user = User.objects.get(username=username)
 
-  user.save()
+    except User.DoesNotExist:
+      user = User(username=username)
+
+    user.set_password("12345678")
+    user.is_active = True
+
+    print "save user", user.username
+
+    user.save()
 

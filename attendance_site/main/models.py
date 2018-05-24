@@ -4,7 +4,9 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
-class LeaderRelatedEntry(models.Model):
+class StaffRelatedEntry(models.Model):
+  class Meta:
+    unique_together = ("user", "staff_user")
   user = models.ForeignKey(User)
-  leader_user = models.ForeignKey(User, related_name="leader_user")
+  staff_user = models.ForeignKey(User, related_name="staff_user")
 
