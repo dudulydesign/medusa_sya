@@ -3,9 +3,10 @@ import os, sys
 def setup():
   BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 
-  sys.path.insert(0, os.path.join(BASE_DIR, "attendance_site"))
+  sys.path.insert(0, BASE_DIR)
+  sys.path.insert(0, os.path.join(BASE_DIR, "medusa_site"))
 
-  os.environ["DJANGO_SETTINGS_MODULE"] = "attendance_site.settings"
+  os.environ["DJANGO_SETTINGS_MODULE"] = "medusa_site.settings"
 
   import django
   django.setup()

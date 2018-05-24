@@ -39,7 +39,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'attendance_site.urls'
+ROOT_URLCONF = 'medusa_site.urls'
 
 TEMPLATES = [
     {

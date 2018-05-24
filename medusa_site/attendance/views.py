@@ -9,11 +9,12 @@ from .models import OvertimeEntry
 
 from django.shortcuts import render
 from django.core.exceptions import PermissionDenied
-from .forms import ApplyOvertimeForm
+from .forms import ApplyOvertimeForm, OvertimeAuditForm
 from main.models import StaffRelatedEntry
 
 STATUS_WAIT = 0
 STATUS_SUCCESS = 1
+STATUS_REJECTED = 2
 STATUS_CANCEL = 3
 
 def status_to_text(status):
@@ -30,11 +31,38 @@ def status_to_text(status):
 
 
 def overtime_audit(request): 
+  print "=" * 100
+  print "method", request.method
   _id = int(request.GET["q"])
   entry = OvertimeEntry.objects.get(id=_id)
 
+  if request.method == "POST":
+    form = OvertimeAuditForm(request.POST)
+    print "is_valid", form.is_valid()
+    if form.is_valid():
+      status = form.cleaned_data["status"]
+
+      print "!!!> status", status
+      if status == 1:
+        entry.status = STATUS_SUCCESS
+      else:
+        entry.status = STATUS_REJECTED 
+      entry.save()
+
+      print "SUCCESS!!"
+
+      return JsonResponse({"code": 0, "msg": u"簽核成功"})
+    
+    return JsonResponse({"code": 1, "msg": str(form.errors)})
+
+
+  else:
+
+    form = OvertimeAuditForm()
+
   return TemplateResponse(request, "attendance/overtime_audit.html", {
     "entry": entry,
+    "form": form,
     })
 
 def leader_audit_list(request):

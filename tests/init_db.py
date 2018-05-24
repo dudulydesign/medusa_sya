@@ -1,7 +1,18 @@
-
+﻿
 
 def main():
   from django.contrib.auth.models import User
+  from main.models import DepartmentEntry
+
+  try:
+    department = DepartmentEntry.objects.get(id=1)
+  except DepartmentEntry.DoesNotExist:
+    department = DepartmentEntry(id=1)
+
+  department.name = u"王族遊戲"
+  department.ordering = 0
+  department.save()
+
 
   username = "admin"
   try:

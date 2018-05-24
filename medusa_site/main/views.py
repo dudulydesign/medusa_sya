@@ -9,7 +9,11 @@ def index(request):
   if not request.user.is_authenticated():
     return HttpResponseRedirect(reverse_url("login"))
 
+  overtime_count = 1
+  
+
   return TemplateResponse(request, "index.html", {
+    "overtime_count":overtime_count
   })
 
 def login_view(request):
