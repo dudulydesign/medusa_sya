@@ -6,16 +6,14 @@ from django.core.paginator import Paginator
 from django.utils import timezone
 from utils.paginations import generate_pagination
 from .models import OvertimeEntry
+from main.models import StaffRelatedEntry
 
 from django.shortcuts import render
 from django.core.exceptions import PermissionDenied
 from .forms import ApplyOvertimeForm, OvertimeAuditForm
-from main.models import StaffRelatedEntry
+from .queries import get_user_overtime_queryset
+from .consts import *
 
-STATUS_WAIT = 0
-STATUS_SUCCESS = 1
-STATUS_REJECTED = 2
-STATUS_CANCEL = 3
 
 def status_to_text(status):
   if status == STATUS_WAIT:
@@ -76,17 +74,7 @@ def leader_audit_list(request):
   except:
     pass
 
-
-  staff_entries = list(StaffRelatedEntry.objects.filter(user_id=request.user.id).all())
-  staff_user_ids = [s.staff_user_id for s in staff_entries]
-  print "staff_user_ids", staff_user_ids
-
-  qs = OvertimeEntry.objects
-  qs = qs.filter(status=STATUS_WAIT)
-  #qs = qs.exclude(user_id=request.user.id)
-  qs = qs.filter(user_id__in=staff_user_ids)
-  #qs = qs.exclude(status=STATUS_CANCEL)
-  qs = qs.order_by("-pub_date")
+  qs = get_user_overtime_queryset(request.user.id)
 
 
   pagination = generate_pagination(request, qs, 30)

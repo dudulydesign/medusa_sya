@@ -4,7 +4,7 @@
   <script type="test/javascript">
   $(function(){
       
-    $("overtime-audit-form").submit(function(){
+    $("#overtime-audit-form").submit(function(){
       var url = $(this).attr("action");
       console.log(">>>Submit", url);
       var post_data = $(this).serialize();
@@ -29,7 +29,9 @@
 </head>
 <body>
   <H2>加班簽核</h2>
-  <table>
+
+  
+  <table id="table1" class="table-style1">
     <tr>
       <td>username</td>
       <td>{{ entry.user.username }}</td>
