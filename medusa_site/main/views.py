@@ -17,26 +17,6 @@ def index(request):
   #select count(*) from table where .......
   overtime_count = overtime_qs.count()
 
-  #overtime_count = 1
-  '''
-  overtime_count = list(set(leader_audit_list))
-  id_audit_list = list()
-  for i in overtime_count:
-    audit_count = leader_audit_list.count(i)
-    if audit_count == length:
-      id_audit_list.append(i)
- 
-  overtime_count = list(StaffRelatedEntry.objects.filter(user_id=request.user.id).all())
-  arr = [overtime_count]
-  arr_appear = dict((a, overtime_count.count(a)) for a in overtime_count);
-  print arr_appear;
-  
-  qs = OvertimeEntry.objects
-  qs = qs.filter(status=STATUS_WAIT)
-  qs = qs.filter(user_id__in=arr_appear)
-  qs = qs.order_by("-pub_date")
-  '''
-
 
   return TemplateResponse(request, "index.html", {
     "overtime_count":overtime_count
