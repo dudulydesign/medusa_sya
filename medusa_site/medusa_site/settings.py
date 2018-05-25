@@ -57,7 +57,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'attendance_site.wsgi.application'
+WSGI_APPLICATION = 'medusa_site.wsgi.application'
 
 
 # Database
