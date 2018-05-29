@@ -2,7 +2,6 @@
 {% load static %}
 
 {% block extra_head %}
-
   <link rel="stylesheet" type="text/css" href="{% static 'css/jquery-ui.min.css' %}" />
   <link rel="stylesheet" type="text/css" href="{% static 'css/jquery-ui-timepicker-addon.css' %}" />
 
@@ -19,6 +18,7 @@
 {% endblock %}
 
 {% block content %}
+
 <h2>加班申請</h2>
 <form action="" method="POST">
   {% csrf_token %}
@@ -29,6 +29,8 @@
 <input type="submit" value="OK"/>
 
 </form>
+
+
 
 {% endblock %}
 
