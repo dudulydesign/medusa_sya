@@ -64,8 +64,12 @@ tr:nth-child(even){background-color: #f2f2f2;}
 }
 
 #nav {
+    -webkit-flex: initial;
+            flex: initial;
     height: 100%;
+    display: block;
     width: 200px;
+    min-width: 100px;
     position: fixed;
     z-index: 1;
     top: 30px;
@@ -75,10 +79,15 @@ tr:nth-child(even){background-color: #f2f2f2;}
 }
 
 #nav a {
+  display: block;
   color: white;
   padding: 13px;
   text-decoration:none;
-  display: block;
+  font-weight: bold;
+  letter-spacing: 0.1em;
+  height: 2.5em;
+  border-bottom: 0.5px solid ;
+  
 }
 
 #nav a:hover {
@@ -97,14 +106,12 @@ tr:nth-child(even){background-color: #f2f2f2;}
 
 #logout{
   color:hsl(0, 0%, 50%);
-  height: 100%;
-  width: 200px;
-  position: fixed;
-  z-index: 2;
+  z-index: 1;
+  right: 10px;
   top: 0;
-  right: 0;
+  height: 40px;
+  position: fixed;
   overflow: hidden;
-
 }
 
 #content {

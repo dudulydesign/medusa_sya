@@ -45,7 +45,7 @@
       <th>結束時間</th>
       <th>分鐘</th>
       <th>原因</th>
-      <th>操作</th>
+      <th>勾選</th>
     </tr>
   </thead>
   <tbody>
@@ -59,7 +59,7 @@
       <td>{{ obj.reason }}</td>
       <td>
 
-        <a class="overtime-audit-link" href="{% url 'overtime_audit' %}?q={{ obj.id }}">簽核</a>
+        <a class="overtime-audit-link" href="{% url 'overtime_audit' %}?q={{ obj.id }}"><input type="checkbox"></a>
 
        
       </td>
