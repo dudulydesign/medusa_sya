@@ -39,13 +39,13 @@
 <table>
   <thead>
     <tr>
-      <th style="width= 20px">送簽者</th>
+      <th>送簽者</th>
       <th>狀態</th>
       <th>開始時間</th>
       <th>結束時間</th>
       <th>分鐘</th>
       <th>原因</th>
-      <th style="width= 20px">操作</th>
+      <th>操作</th>
     </tr>
   </thead>
   <tbody>
@@ -61,11 +61,7 @@
 
         <a class="overtime-audit-link" href="{% url 'overtime_audit' %}?q={{ obj.id }}">簽核</a>
 
-        <!--
-
-        <a class="overtime-cancel-link" href="{% url 'overtime_cancel'%}?q={{ obj.id }}">通過</a>
-        <a class="overtime-cancel-link" href="{% url 'overtime_cancel'%}?q={{ obj.id }}">不通過</a>
-        -->
+       
       </td>
 
     </tr>

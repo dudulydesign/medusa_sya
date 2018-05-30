@@ -6,13 +6,18 @@ h2 {
   text-decoration-color:#3c3c3c;
 }
 
-body{font-family: 'Roboto', sans-serif;}
+body{
+  font-family : "Lucida Grande", Verdana, Lucida, Arial, Helvetica, 宋体,sans-serif;
+  margin-bottom: 120px;
+}
 
 table {
     border-collapse: collapse;
     border-radius:10px;
     border-spacing: 0;
-    width: 100%;
+    -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+            box-sizing: border-box;
 }
 
 th, td {
@@ -23,7 +28,9 @@ th, td {
 }
 
 th { background-color: #f2f2f2}
-tr:nth-child(even){background-color: #f2f2f2}
+tr:nth-child(even){background-color: #f2f2f2;}
+
+
 
 
 #container {
@@ -75,8 +82,8 @@ tr:nth-child(even){background-color: #f2f2f2}
 }
 
 #nav a:hover {
-    background-color: hsla(0, 0%, 100%, 0.4);
-    color: black;
+  background-color: hsla(0, 0%, 100%, 0.4);
+  color: black;
 }
 
 #login{
@@ -101,8 +108,10 @@ tr:nth-child(even){background-color: #f2f2f2}
 }
 
 #content {
+    position: static;
     height: 100%;
-    float:left;
+    align: center;
+    float: left;
     margin-left: 200px;
     padding-top: 40px;
     padding-bottom: 40px;
@@ -110,13 +119,12 @@ tr:nth-child(even){background-color: #f2f2f2}
 }
 
 #footer {
-  position: absolute; 
-  right: 0;
+  position: fixed;
   bottom: 0;
-  width: 100;
-  padding: 200px;
-  background-color: #efefef;
-  text-align: center;
+  left: 0;
+  height: 70px;
+  background-color: white;
+  width: 100%;
+  z-index: 2;
 }
-
 
