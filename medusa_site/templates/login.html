@@ -3,7 +3,7 @@
 {% block content %}
 
 
-  <div id="container" class="w3-container">
+  <div id="container">
     <div id="header">
         <div id="branding">
           <div id="login">
@@ -11,9 +11,9 @@
               <form action="{% url 'login' %}" method="POST">
                  {% csrf_token %}
 
-      <table>
-        {{ login_form.as_table }}
-      </table>
+                <table>
+                  {{ login_form.as_table }}
+                </table>
       
              <div>
                <input type="submit" value="登入"/>
