@@ -136,14 +136,6 @@ def cancel_overtime(request):
         "message": u"失敗",
         "code": 1,
     })
-'''
-def audit_(request):
-  if request.user.is_authenticated():
-    _id = int(request.GET["q"])
-
-  try:
-    entry = OvertimeEntry.objects.get(
-'''
 
 def apply_overtime(request):
   if not request.user.is_authenticated():

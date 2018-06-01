@@ -6,10 +6,12 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 import main.urls
 import attendance.urls
+import takeleave.urls
 
 urlpatterns = [
     url(r'^', include(main.urls)),
     url(r'^attendance/', include(attendance.urls)),
+    url(r'^takeleave/', include(takeleave.urls)),
     url(r'^admin/', admin.site.urls),
 ]
 
