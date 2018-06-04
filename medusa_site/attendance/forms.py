@@ -2,7 +2,7 @@ from django import forms
 
 
 class ApplyOvertimeForm(forms.Form):
-  department = forms.ChoiceField(choices=[(1, 'IT'),(0, 'HR')])
+  department = forms.ChoiceField(choices=[(0, ''),(1, 'IT'),(2, 'HR')])
   start_time = forms.DateTimeField()
   end_time = forms.DateTimeField()
   reason = forms.CharField(widget= forms.Textarea)

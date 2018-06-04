@@ -12,5 +12,4 @@ def index(request):
     })
 
 
-def law_takeleave(request):
-  return TemplateResponse(request, "law_takeleave.html")
+
