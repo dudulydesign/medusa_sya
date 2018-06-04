@@ -31,6 +31,33 @@ def status_to_text(status):
 
   return "Nan"
 """
+def takeleave_audit(request):
+  print "=" * 100
+  print "method", request.method
+  _id = int(request.GET["q"])
+  entry = TakeleaveEntry.objects.get(id=_id)
+
+  if request.method == "POST":
+    form = TakeleaveAuditForm(request.POST)
+    print "is_valid", form.is_valid()
+    if form.is_valid():
+      status = form.cleaned_data["status"]
+
+      print "!!!> status", status
+      if status == 1:
+        entry.status = STAUS_SUCCESS
+      else:
+        entry.status = STATUS_REJECTED
+      entry.save()
+
+      priint "SUCCESS!!"
+
+      return JsonResponse({"code": 0, "msg": u"簽核成功"})
+    return JsonResponse({"code": 1, "msg": str(form.errors)})
+
+  else:
+    form = 
+
 
 def takeleave_list(request):
   if not request.user.is_authenticated():

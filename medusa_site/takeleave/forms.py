@@ -8,5 +8,5 @@ class ApplyTakeleaveForm(forms.Form):
   end_time = forms.DateTimeField()
   reason = forms.CharField(widget = forms.Textarea)
 
-class TakeleaveForm(forms.Form):
+class TakeleaveAuditForm(forms.Form):
   status = forms.ChoiceField(choices=[(1, 'OK'),(0, 'NO')])

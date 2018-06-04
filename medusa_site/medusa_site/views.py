@@ -10,3 +10,7 @@ def index(request):
   return TemplateResponse(request, "index.html", {
     "login_form": login_form,
     })
+
+
+def law_takeleave(request):
+  return TemplateResponse(request, "law_takeleave.html")
