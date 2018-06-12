@@ -20,7 +20,7 @@
   </script>
 {% endblock %}
 {% block content%}
-<h2>出缺勤統計</h2>
+<h2>出缺勤記錄</h2>
   <table>
     <thead>
       <tr>
@@ -45,7 +45,7 @@
         <td>{{ obj.minutes }}</td>
         <td>{{ obj.reason }}</td>
         <td>
-          <a class="takeleave-cancel-link" href="{% url 'overtime_cancel' %}?q={{ obj.id }}"><input type="checkbox"></a>
+          <a class="takeleave-cancel-link" href="{% url 'takeleave_cancel' %}?q={{ obj.id }}"><input type="checkbox"></a>
         </td>
       </tr>
       {% endfor %}

@@ -50,7 +50,7 @@ def takeleave_audit(request):
 
       print "!!!> status", status
       if status == 1:
-        entry.status = STAUS_SUCCESS
+        entry.status = STATUS_SUCCESS
       else:
         entry.status = STATUS_REJECTED
       entry.save()
@@ -69,9 +69,32 @@ def takeleave_audit(request):
     })
 
 
+def takeleave_audit_list(request):
+  if not request.user.is_authenticated():
+    raise PermissionDenied
+  page_number = 1
+  try:
+    page_number = int(request.GET["p"])
+  except:
+    pass
+
+  qs = get_user_takeleave_queryset(request.user.id)
+
+  pagination = generate_pagination(request, qs, 30)
+
+  for obj in pagination.page.object_list:
+    obj.minutes = round((obj.end_time - obj.start_time).total_seconds() / 60.0, 2)
+    obj.status_name = status_to_text(obj.status)
+
+  return TemplateResponse(request, "attendance/takeleave_audit.html",{
+    "pagination": pagination,
+  })
+
+
 def takeleave_list(request):
   if not request.user.is_authenticated():
     raise PermissionDenied
+
   page_number = 1
   try:
     page_number = int(request.GET["p"])
@@ -88,7 +111,7 @@ def takeleave_list(request):
     obj.minutes = round((obj.end_time - obj.start_time).total_seconds() / 60.0, 2)
     obj.status_name = status_to_text(obj.status)
 
-  return TemplateResponse(request, "attendance/takeleave_list.html",{
+  return TemplateResponse(request, "attendance/takeleave_list.html", {
     "pagination": pagination,
   })
 
@@ -131,8 +154,6 @@ def apply_takeleave(request):
       delta = end_time - start_time
       print "delta", delta
       entry = TakeleaveEntry(
-          category = category,
-          department = department,
           user = request.user,
           start_time = start_time,
           end_time = end_time,

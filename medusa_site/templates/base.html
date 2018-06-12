@@ -29,13 +29,13 @@
         <div id="nav">
             <ul>
                 <p><a href="{% url 'apply_takeleave' %}">請假申請</a></p>
-                <p><a href="{% url 'takeleave_audit' %}">假期查詢</a></p>
-                <p><a href="{% url 'takeleave_list' %}">出缺勤統計</a></p>
+                <p><a href="{% url 'takeleave_list' %}">出缺勤記錄</a></p>
+                <p><a href="{% url 'takeleave_audit' %}">出缺勤簽核({{ overtime_count }})</a></p>
             </ul>
             <ul>
               <p><a href="{% url 'apply_overtime' %}">加班申請</a></p>
               <p><a href="{% url 'overtime_list' %}">加班紀錄</a></p>
-              <p><a href="{% url 'leader_audit' %}">簽核作業({{ overtime_count }})</a></p>
+              <p><a href="{% url 'leader_audit' %}">加班簽核({{ overtime_count }})</a></p>
             </ul>
             <ul>
                 <p><a href="{% url 'index' %}">參考規則</a></p>

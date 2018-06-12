@@ -1,13 +1,35 @@
 ﻿
-
-
+ 
 def init_takeleave():
   from takeleave.models import Category
+  """
+  from takeleave.models import Department
+
+  takeleave_department = {
+    1: {"name": u"IT"},
+    2: {"name": u"HR"},
+      }
+
+   for id, item in takeleave_department.items():
+    try: 
+      dep = Department.objects.get(id=id)
+    except Department.DoesNotExist:
+      dep = Department(id=id, ordering=0)
+    
+    dep.name = item["name"]
+    dep.save()
+    print "save takeleave department=%s name=%s" % (dep.id, dep.name)
+"""
+
+
   takeleave_categories = {
     1: {"name": u"病假"},
     2: {"name": u"公假"},
     3: {"name": u"事假"},
-    4: {"name": u"其它"},
+    5: {"name": u"喪假"},
+    6: {"name": u"婚假"},
+    7: {"name": u"特休"},
+    8: {"name": u"其它"},
       }
 
   for id, item in takeleave_categories.items():

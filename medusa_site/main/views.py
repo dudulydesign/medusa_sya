@@ -6,11 +6,14 @@ from django.contrib.auth import login as auth_login, logout as auth_logout
 from .forms import LoginForm
 from attendance.views import leader_audit_list
 from attendance.queries import get_user_overtime_queryset
+from takeleave.views import takeleave_audit_list
+from takeleave.queries import get_user_takeleave_queryset
 
 
 def index(request):
   if not request.user.is_authenticated():
     return HttpResponseRedirect(reverse_url("login"))
+
 
   overtime_qs = get_user_overtime_queryset(request.user.id)
 

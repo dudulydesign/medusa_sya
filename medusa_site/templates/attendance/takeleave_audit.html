@@ -30,7 +30,7 @@
 
 {% block content %}
 
-<h2>請假作業</h2>
+<h2>出缺勤簽核</h2>
 <table>
   <thead>
     <tr>
@@ -55,7 +55,7 @@
       <td>{{ obj.minutes }}</td>
       <td>{{ obj.reason }}</td>
      
-      <td><a class="takeleave-audit-link" href="{% url 'overtime_audit' %}?q={{ obj.id }}"><input type="checkbox"></a></td>
+      <td><a class="takeleave-audit-link" href="{% url 'takeleave_audit' %}?q={{ obj.id }}"><input type="checkbox"></a></td>
     </tr>
   {% endfor %}
   </tbody>

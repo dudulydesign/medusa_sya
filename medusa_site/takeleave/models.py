@@ -8,10 +8,18 @@ class Category(models.Model):
 
   def __unicode__(self):
     return self.name
-  
+
+class Department(models.Model):
+  name = models.CharField(max_length=100)
+  ordering = models.IntegerField()
+
+  def __unicode__(self):
+    return self.name
+
 class TakeleaveEntry(models.Model):
   user = models.ForeignKey(User)
   category = models.ForeignKey(Category)
+  department = models.ForeignKey(Department)
   status = models.IntegerField()
   start_time = models.DateTimeField()
   end_time = models.DateTimeField()
