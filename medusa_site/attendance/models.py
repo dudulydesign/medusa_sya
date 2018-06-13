@@ -1,8 +1,17 @@
 ﻿from django.db import models
 from django.contrib.auth.models import User
 
+class Department(models.Model):
+  name = models.CharField(max_length=100)
+  ordering = models.IntegerField()
+
+  def __unicode__(self):
+    return self.name
+
+
 class OvertimeEntry(models.Model):
   user = models.ForeignKey(User)
+  department = models.ForeignKey(Department)
   status = models.IntegerField()
   start_time = models.DateTimeField()
   end_time = models.DateTimeField()

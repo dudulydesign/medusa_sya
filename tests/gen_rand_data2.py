@@ -8,6 +8,7 @@ def main():
   from django.contrib.auth.models import User
   from django.utils import timezone
   from takeleave.models import TakeleaveEntry
+  from takeleave.models import Department
   from faker import Faker
 
   random.seed(datetime.now())
@@ -38,6 +39,7 @@ def main():
     entry = TakeleaveEntry(
       user=user,
       status=0,
+      department=department,
       start_time=start_time,
       end_time=end_time,
       pub_date=timezone.now(),

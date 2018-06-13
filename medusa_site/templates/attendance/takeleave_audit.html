@@ -1,31 +1,36 @@
 {% extends "base.html" %}
 {% load static %}
 {% block extra_head %}
-  
-  <link rel"stylesheet" type="text/css" href="{% static 'js/facebox/facebox.css' %}"/>
-  <script type="text/javascript" src="{% static 'js/facebox/facebox.js' %}"></script>
+
+  <link rel="stylesheet" type="text/css" href="{% static 'js/facebox/facebox.css' %}" />
+  <script type="text/javascript" src="{% static 'js/facebox/facebox.js'%}"></script>
+
   <script type="text/javascript">
-  $(function()
+  $(function() 
     {
-      $(".takeleave-audit-link").facebox();
-      $(".takeleave-cancel-link").click(function(){
-        var ok = confirm("Are you sure?");
-        var url = $(this).attr("href");
-        if(ok) {
-          $.get(url, function(rep){
-            alert(rep.message);
+
+
+      $(".overtime-audit-link").facebox();
+
+    $(".overtime-cancel-link").click(function(){
+      var ok = confirm("確定要取消嗎?");
+      var url = $(this).attr("href");
+
+      if(ok) {
+        $.get(url, function(rep){
+          alert(rep.message);
             if(rep.code == 0) {
-              window.location.reload();
+            window.location.reload();
             }
-          });
-        }
-        return false;
       });
-   });
+     }
+      return false;
+    });
+  });
 
   </script>
-
 {% endblock %}
+
 
 
 {% block content %}

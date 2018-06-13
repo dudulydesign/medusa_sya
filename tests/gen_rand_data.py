@@ -38,6 +38,7 @@ def main():
     entry = OvertimeEntry(
       user=user,
       status=0,
+      department=department,
       start_time=start_time,
       end_time=end_time,
       pub_date=timezone.now(),

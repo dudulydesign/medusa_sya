@@ -144,10 +144,10 @@ def apply_takeleave(request):
     form = ApplyTakeleaveForm(request.POST)
     if form.is_valid():
       print "->" * 100
-     
       start_time = form.cleaned_data["start_time"]
       end_time = form.cleaned_data["end_time"]
       reason = form.cleaned_data["reason"]
+
 
       now = timezone.now()
 

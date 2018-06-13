@@ -1,12 +1,18 @@
 from django import forms
 
+def ApplyOvertimeForm(*args, **kwargs):
+  from .models import Department
+  department = list(Department.objects.order_by("-ordering"))
+  choices = [(d.id, d.name) for d in department]
 
-class ApplyOvertimeForm(forms.Form):
-  department = forms.ChoiceField(choices=[(0, ''),(1, 'IT'),(2, 'HR')])
-  start_time = forms.DateTimeField()
-  end_time = forms.DateTimeField()
-  reason = forms.CharField(widget= forms.Textarea)
 
+  class ApplyOvertimeForm(forms.Form):
+    department = forms.ChoiceField(choices=choices)
+    start_time = forms.DateTimeField()
+    end_time = forms.DateTimeField()
+    reason = forms.CharField(widget= forms.Textarea)
+
+  return ApplyOvertimeForm
 
 class OvertimeAuditForm(forms.Form):
 

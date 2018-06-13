@@ -1,26 +1,26 @@
 ﻿
- 
-def init_takeleave():
-  from takeleave.models import Category
-  """
-  from takeleave.models import Department
 
-  takeleave_department = {
+def init_overtime():
+  from attendance.models import Department
+
+  overtime_department = {
     1: {"name": u"IT"},
     2: {"name": u"HR"},
       }
 
-   for id, item in takeleave_department.items():
-    try: 
-      dep = Department.objects.get(id=id)
+  for id, item in overtime_department.items():
+    try:
+      over = Department.objects.get(id=id)
     except Department.DoesNotExist:
-      dep = Department(id=id, ordering=0)
-    
-    dep.name = item["name"]
-    dep.save()
-    print "save takeleave department=%s name=%s" % (dep.id, dep.name)
-"""
+      over = Department(id=id, ordering=0)
 
+    over.name = item["name"]
+    over.save()
+    print "save overtime department=%s name=%s" % (over.id, over.name)
+ 
+def init_takeleave():
+  from takeleave.models import Category
+  from takeleave.models import Department
 
   takeleave_categories = {
     1: {"name": u"病假"},
@@ -41,6 +41,21 @@ def init_takeleave():
     cat.name = item["name"]
     cat.save()
     print "save takeleave category=%s name=%s" % (cat.id, cat.name)
+
+  takeleave_department = {
+    1: {"name": u"IT"},
+    2: {"name": u"HR"},
+      }
+
+  for id, item in takeleave_department.items():
+    try:
+      dep = Department.objects.get(id=id)
+    except Department.DoesNotExist:
+      dep = Department(id=id, ordering=0)
+
+    dep.name = item["name"]
+    dep.save()
+    print "save takeleave department=%s name=%s" % (dep.id, dep.name)
 
 
 def init_test_users():
