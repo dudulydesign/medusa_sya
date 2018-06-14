@@ -33,7 +33,18 @@ def status_to_text(status):
   return "Nan"
 
 
-  
+ 
+
+def abc(request):
+
+  qs = TakeleaveEntry.objects.all()
+
+  objs = list(qs)
+
+
+  return TemplateResponse(request, "abc.html", {
+    "objs": objs
+    })
 
 
 def takeleave_audit(request):
@@ -147,6 +158,7 @@ def apply_takeleave(request):
       start_time = form.cleaned_data["start_time"]
       end_time = form.cleaned_data["end_time"]
       reason = form.cleaned_data["reason"]
+      department_id = form.cleaned_data["department"]
 
 
       now = timezone.now()
@@ -154,6 +166,7 @@ def apply_takeleave(request):
       delta = end_time - start_time
       print "delta", delta
       entry = TakeleaveEntry(
+          department_id = department_id,
           user = request.user,
           start_time = start_time,
           end_time = end_time,

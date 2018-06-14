@@ -148,6 +148,7 @@ def apply_overtime(request):
       start_time = form.cleaned_data["start_time"]
       end_time = form.cleaned_data["end_time"]
       reason = form.cleaned_data["reason"]
+      department_id = form.cleaned_data["department"]
 
       #now = datetime.now()  1999.1.1 +08:00
       now = timezone.now()   # 1999.1.1 +00:00
@@ -156,6 +157,7 @@ def apply_overtime(request):
       print "delta", delta
       entry = OvertimeEntry(
           user = request.user,
+          department_id = department_id,
           start_time = start_time,
           end_time = end_time,
           status=STATUS_WAIT,

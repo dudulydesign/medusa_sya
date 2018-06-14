@@ -11,8 +11,7 @@ def ApplyTakeleaveForm(*args, **kwargs):
   department = list(Department.objects.order_by("-ordering"))
   choices2 = [(d.id, d.name) for d in department]
 
-
-  class ApplyTakeleaveForm(forms.Form):
+  class _ApplyTakeleaveForm(forms.Form):
     category = forms.ChoiceField(choices=choices)
     #category = forms.ChoiceField(choices=[(0, ''),(1, 'Leave for Statutory Reasons'),(2, 'Personal Leave'),(3, 'Menstrual Leave'),(4, 'Sick Leave')])
     department = forms.ChoiceField(choices=choices2)
@@ -20,7 +19,7 @@ def ApplyTakeleaveForm(*args, **kwargs):
     end_time = forms.DateTimeField()
     reason = forms.CharField(widget = forms.Textarea)
 
-  return ApplyTakeleaveForm
+  return _ApplyTakeleaveForm(*args, **kwargs)
 
 
 

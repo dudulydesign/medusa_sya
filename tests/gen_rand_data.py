@@ -37,8 +37,8 @@ def main():
     end_time = start_time + timedelta(minutes=random.randint(1, 600))
     entry = OvertimeEntry(
       user=user,
-      status=0,
       department=department,
+      status=0,
       start_time=start_time,
       end_time=end_time,
       pub_date=timezone.now(),
@@ -47,4 +47,3 @@ def main():
     entry.save()
 
     print "create overtime", entry.id, entry.user_id, entry.start_time
-

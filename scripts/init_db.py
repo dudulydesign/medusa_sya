@@ -86,3 +86,4 @@ def main():
 
   init_test_users()
   init_takeleave()
+  init_overtime()

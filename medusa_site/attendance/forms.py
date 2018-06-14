@@ -6,13 +6,13 @@ def ApplyOvertimeForm(*args, **kwargs):
   choices = [(d.id, d.name) for d in department]
 
 
-  class ApplyOvertimeForm(forms.Form):
+  class _ApplyOvertimeForm(forms.Form):
     department = forms.ChoiceField(choices=choices)
     start_time = forms.DateTimeField()
     end_time = forms.DateTimeField()
     reason = forms.CharField(widget= forms.Textarea)
 
-  return ApplyOvertimeForm
+  return _ApplyOvertimeForm(*args, **kwargs)
 
 class OvertimeAuditForm(forms.Form):
 
